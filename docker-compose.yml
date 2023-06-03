@@ -1,7 +1,7 @@
 version: '3'
 services:
   dns:
-    image: jrcichra/lancachenet-lancache-dns:latest  ## Pulling DNS server for arm
+    image: joydenfew/lancachenet-lancache-dns:latest  ## Pulling DNS server for arm
     env_file: .env
     ports:
       - ${DNS_BIND_IP}:53:53/udp
@@ -14,7 +14,7 @@ services:
 ##      - 443:443/tcp
 ##    restart: always
   monolithic:
-    image: jrcichra/lancachenet-monolithic:latest ## Pulling monolithic for arm
+    image: joydenfew/lancachenet-monolithic:latest ## Pulling monolithic for arm
     env_file: .env
     ports:
       - 80:80/tcp

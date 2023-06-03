@@ -37,46 +37,46 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build & Push lancachenet/ubuntu
         run: |
-          git clone https://github.com/lancachenet/ubuntu.git
-          cd ubuntu
-          docker buildx build --platform linux/arm/v7,linux/arm64 -t jrcichra/lancachenet-ubuntu --push .
+          git clone https://github.com/joydenfew/lancache-ubuntu.git
+          cd lancache-ubuntu
+          docker buildx build --platform linux/arm/v7,linux/arm64,linux/arm/v5,linux/arm/v6,linux/amd64 -t joydenfew/lancachenet-ubuntu --push .
           cd ..
       - name: Build & Push lancachenet/ubuntu-nginx
         run: |
-          git clone https://github.com/lancachenet/ubuntu-nginx.git
-          cd ubuntu-nginx
-          sed -i '1cFROM jrcichra/lancachenet-ubuntu' Dockerfile
+          git clone https://github.com/joydenfew/lancache-ubuntu-nginx.git
+          cd lancache-ubuntu-nginx
+          sed -i '1cFROM joydenfew/lancachenet-ubuntu' Dockerfile
           cat Dockerfile
-          docker buildx build --platform linux/arm/v7,linux/arm64 -t jrcichra/lancachenet-ubuntu-nginx --push .
+          docker buildx build --platform linux/arm/v7,linux/arm64,linux/arm/v5,linux/arm/v6,linux/amd64 -t joydenfew/lancachenet-ubuntu-nginx --push .
           cd ..
       - name: Build & Push lancachenet/generic
         run: |
           git clone https://github.com/lancachenet/generic.git
           cd generic
-          sed -i '1cFROM jrcichra/lancachenet-ubuntu-nginx' Dockerfile
+          sed -i '1cFROM joydenfew/lancachenet-ubuntu-nginx' Dockerfile
           cat Dockerfile
-          docker buildx build --platform linux/arm/v7,linux/arm64 -t jrcichra/lancachenet-generic --push .
+          docker buildx build --platform linux/arm/v7,linux/arm64,linux/arm/v5,linux/arm/v6,linux/amd64 -t joydenfew/lancachenet-generic --push .
           cd ..
       - name: Build & Push lancachenet/monolithic
         run: |
-          git clone https://github.com/lancachenet/monolithic.git
-          cd monolithic
-          sed -i '1cFROM jrcichra/lancachenet-generic' Dockerfile
+          git clone https://github.com/joydenfew/lancache-monolithic.git
+          cd lancache-monolithic
+          sed -i '1cFROM joydenfew/lancachenet-generic' Dockerfile
           cat Dockerfile
           cp ../20_cache.conf overlay/etc/nginx/sites-available/cache.conf.d/root/20_cache.conf
-          docker buildx build --platform linux/arm/v7,linux/arm64 -t jrcichra/lancachenet-monolithic --push .
+          docker buildx build --platform linux/arm/v7,linux/arm64,linux/arm/v5,linux/arm/v6,linux/amd64 -t joydenfew/lancachenet-monolithic --push .
           cd ..
       - name: Build & Push lancachenet/sniproxy
         run: |
-          git clone https://github.com/lancachenet/sniproxy.git
-          cd sniproxy
-          docker buildx build --platform linux/arm/v7,linux/arm64 -t jrcichra/lancachenet-sniproxy --push .
+          git clone https://github.com/joydenfew/lancache-sniproxy.git
+          cd lancache-sniproxy
+          docker buildx build --platform linux/arm/v7,linux/arm64,linux/arm/v5,linux/arm/v6,linux/amd64 -t joydenfew/lancachenet-sniproxy --push .
           cd ..
       - name: Build & Push lancachenet/lancache-dns
         run: |
           git clone https://github.com/lancachenet/lancache-dns.git
           cd lancache-dns
-          sed -i '1cFROM jrcichra/lancachenet-ubuntu' Dockerfile
+          sed -i '1cFROM joydenfew/lancachenet-ubuntu' Dockerfile
           cat Dockerfile
-          docker buildx build --platform linux/arm/v7,linux/arm64 -t jrcichra/lancachenet-lancache-dns --push .
+          docker buildx build --platform linux/arm/v7,linux/arm64,linux/arm/v5,linux/arm/v6,linux/amd64 -t joydenfew/lancachenet-lancache-dns --push .
           cd ..
